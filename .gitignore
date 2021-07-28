@@ -1,0 +1,4 @@
+*.sqlite3
+OrphicInstituteMaster/settings.py
+OrphicInstituteMaster/wsgi.py
+OrphicInstituteMaster/urls.py

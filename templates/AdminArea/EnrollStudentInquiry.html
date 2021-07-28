@@ -1,0 +1,419 @@
+{% extends "AdminArea/admin_header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="DashboardKit is modern yet powerful Bootstrap 5 Admin Template comes with thousands of UI components & 180+ pages."/>
+    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template"/>
+    <meta name="author" content="DashboardKit"/>
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+       <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">AdminArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'AdminArea:AdminDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item">Student Inquiry</li>
+                            <li class="breadcrumb-item">Enroll Student Inquiry</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Student Inquiry</h5>
+                    </div>
+
+                   
+                    <div class="card-body">
+                        <div class="row">
+                            {% if SuccessMsg %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{SuccessMsg}}.</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                            {% if FailedMsg %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>{{FailedMsg}}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                        {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:EnrollStudentInquiry' %}" method="POST">
+                                    {% csrf_token %}
+                            </div>
+                             <div class="col-md-6 form-group">
+                                <label class="form-label" for="exampleFormControlSelect1">You Would Like to receive</label>
+                                    <select class="form-control" required id="exampleFormControlSelect1" name="service">
+                                        <option value="">Choose</option>
+                                        <option value="Student Visa">Student Visa</option>
+                                        <option value="Work Visa">Work Visa</option>
+                                        <option value="PR Visa">PR Visa</option>
+                                        <option value="Dependent Visa">Dependent Visa</option>
+                                    </select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">Date</label>
+                                    <input type="date" required class="form-control" id="exampleInputdate" name="date" placeholder="date">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label class="form-label" for="exampleInputEmail1">Full Name</label>
+                                    <input type="text" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Full" name="full_name">
+                                </div>
+                            </div>
+
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleInputPassword1">Birth of Date</label>
+                                    <input type="date" required class="form-control" id="exampleInputdate" placeholder="date" name="dob">
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="form-label" for="exampleFormControlSelect1">Gender</label>
+                                    <select class="form-control" required id="exampleFormControlSelect1" name="gender">
+                                        <option value="">Choose Your Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                            </div>
+                             <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="exampleFormControlTextarea1"> Address</label>
+                                    <textarea class="form-control" required id="exampleFormControlTextarea1" rows="3" name="address"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Mobile Number</label>
+                                    <input type="text" required class="form-control" placeholder="Mobile Number"  name="mobile_number">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Pin Code</label>
+                                    <input type="text" required class="form-control" placeholder="Whatsapp Number" name="PinCode">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" required class="form-control" placeholder="Email" name="email">
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="form-label" for="exampleFormControlSelect1">Married ?</label>
+                                    <select class="form-control" required id="exampleFormControlSelect1" name="married">
+                                        <option value="">--Choose--</option>
+                                        <option value="YES">YES</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                            </div>
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">If Married then Spouse's Education:</label>
+                                    <input type="text" required class="form-control" placeholder="If Married then Spouse's Education" name="IfMarried">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-md-12 form-group">
+                                <div class="table-responsive">
+                                <table id="report-table" class="table table-bordered table-striped mb-0">
+                                    <thead>
+                                        <tr class="">
+                                            <th>Education</th>
+                                            <th style="width: 400px;">Institution</th>
+                                            <th>Year</th>
+                                            <th>Grades(%)</th>
+                                            <th>Backlogs</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        <tr>
+                                            <th>12th (HSC)</th>
+                                            <th>
+                                                <input type="text" required class="form-control" placeholder="" name="HSC_INS">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control" placeholder="" name="HSC_YEAR">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control w-75" placeholder="" name="HSC_GRADES">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control w-75" placeholder="" name="HSC_BACK">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Diploma</th>
+                                            <th>
+                                                <input type="text" required class="form-control" placeholder="" name="DIPLOMA_INS">
+                                            </th>
+                                           <th>
+                                                 <input type="text" required class="form-control" placeholder="" name="DIPLOMA_YEAR">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control w-75" placeholder="" name="DIPLOMA_GRADES">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control w-75" placeholder="" name="DIPLOMA_BACK">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Bachelor's Degree</th>
+                                            <th>
+                                                <input type="text" required class="form-control" placeholder="" name="BACHOLOR_INS">
+                                            </th>
+                                           <th>
+                                                 <input type="text" required class="form-control" placeholder="" name="BACHOLOR_YEAR">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control w-75" placeholder="" name="BACHOLOR_GRADES">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control w-75" placeholder="" name="BACHOLOR_BACK">
+                                            </th>
+                                        </tr>
+                                         <tr>
+                                            <th>Master's/PG  Diploma</th>
+                                            <th>
+                                                <input type="text" required class="form-control" placeholder="" name="MASTER_INS">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control" placeholder="" name="MASTER_YEAR">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control w-75" placeholder="" name="MASTER_GRADES">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control w-75" placeholder="" name="MASTER_BACK">
+                                            </th>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Job Experience (If Any)</label>
+                                    <input type="text" required class="form-control" placeholder="Job Experience" name="jobExp">
+                                </div>
+                            </div>
+
+                           <div class="col-md-3 form-group">
+                                <label class="form-label" for="exampleFormControlSelect1">(If Appeared)</label>
+                                <select class="form-control" required id="exampleFormControlSelect1" name="IfExam">
+                                    <option value="">Choose</option>
+                                    <option value="IELTS">IELTS</option>
+                                    <option value="TOEFL">TOEFL</option>
+                                    <option value="PTE">PTE SCORE</option>
+                                </select>
+                            </div>
+                            <div class="col-md-9 form-group">
+                                <div class="table-responsive">
+                                <table id="report-table" class="table table-bordered table-striped mb-0">
+                                    <thead>
+                                        <tr class="">
+                                            <th>L</th>
+                                            <th>R</th>
+                                            <th>W</th>
+                                            <th>S</th>
+                                            <th>OVER ALL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                <input type="text" required class="form-control" placeholder="" name="L">
+                                            </th>
+                                            <th>
+                                                <input type="text" required class="form-control" placeholder="" name="R">
+                                            </th>
+                                           <th>
+                                                 <input type="text" required class="form-control" placeholder="" name="W">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control w-75" placeholder="" name="S">
+                                            </th>
+                                            <th>
+                                                 <input type="text" required class="form-control w-75" placeholder="" name="ALL">
+                                            </th>
+                                        </tr>
+                          
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            <hr>
+                             <div class="col-md-6 form-group">
+                                <label class="form-label" for="exampleFormControlSelect1">Country Preference</label>
+                                <select class="form-control" required id="exampleFormControlSelect1" name="country">
+                                    <option value="">Choose</option>
+                                    <option value="CANADA">CANADA</option>
+                                    <option value="USA">USA</option>
+                                    <option value="UK">UK</option>
+                                    <option value="AUSTRALIA">AUSTRALIA</option>
+                                    <option value="OTHES">OTHES</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Intake</label>
+                                    <input type="text" required class="form-control" placeholder="Intake" name="intake">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Intended Major Field of Study :</label>
+                                    <input type="text" required class="form-control" placeholder="Intended Major Field of Study" name="FieldOfStudy">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Do You Have a Valid Passport ?</label>
+                                    <select class="form-control" required id="exampleFormControlSelect1" name="HavePassport">
+                                    <option value="">Choose</option>
+                                    <option value="YES">Yes</option>
+                                    <option value="NO">No</option>
+                                </select>
+                                </div>
+                            </div>
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Do You Have any relatives in ?</label>
+                                    <select class="form-control" required id="exampleFormControlSelect1" name="RelativesIn">
+                                    <option value="">Choose</option>
+                                     <option value="CANADA">CANADA</option>
+                                    <option value="USA">USA</option>
+                                    <option value="UK">UK</option>
+                                    <option value="AUSTRALIA">AUSTRALIA</option>
+                                    <option value="OTHES">OTHES</option>
+                                </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Coaching Required For</label>
+                                    <select class="form-control" required id="exampleFormControlSelect1" name="CRequired">
+                                    <option value="">Choose</option>
+                                    <option value="IELTS Academic">IELTS Academic</option>
+                                    <option value="IELTS Genera">IELTS General</option>
+                                    <option value="PTE">PTE</option>
+                                    <option value="Spoken English">Spoken English</option>
+                                </select>
+                                </div>
+                            </div>
+                             <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">How did you come to know about Orphic Immigration & Education Pvt. Ltd. ?</label>
+                                    <select class="form-control" required id="exampleFormControlSelect1" name="reference">
+                                    <option value="">Choose</option>
+                                     <option value="Friend">Friend</option>
+                                    <option value="Relative">Relative</option>
+                                    <option value="News paper">News paper</option>
+                                    <option value="Google">Google</option>
+                                    <option value="Website">Website</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                                </div>
+                            </div>
+                             <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Brance</label>
+                                    <select class="form-control" required id="exampleFormControlSelect1" name="brance">
+                                    <option value="Surat">Surat</option>
+                                    <option value="Ankleshwar">Ankleshwar</option>
+                                </select>
+                                </div>
+                            </div>
+
+                              <div class="row">
+                                <div class="form-group col-md-6">
+                                   <button type="submit" class="btn btn-success"><i class="me-2" data-feather="check-circle"></i>Save</button>
+                                </div>
+                            </div> 
+
+                        </div>
+                        </form>
+         </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+
+    <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
+
+<!-- Apex Chart -->
+<script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+
+<!-- Mirrored from dashboardkit.io/bootstrap/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Mar 2021 09:37:34 GMT -->
+</html>
