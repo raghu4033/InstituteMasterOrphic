@@ -1,1 +1,296 @@
-Test@@User
+{% extends "AdminArea/admin_header.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <title>Dashboard</title>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="{% static 'fonts/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" id="main-style-link">
+    <link rel="stylesheet" href="{% static 'css/customizer.css' %}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Two+Tone|Material+Icons+Sharp">
+
+    
+
+</head>
+
+<body class="">
+	
+        <!-- [ Main Content ] start -->
+
+<div class="pc-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+         <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">AdminArea</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{% url 'AdminArea:AdminDashboard' %}">Home</a></li>
+                            <li class="breadcrumb-item">setting</li>
+                            <li class="breadcrumb-item">User</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- subscribe start -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Admin User List</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6 text-end">
+                                <a class="btn btn-success btn-sm mb-3 btn-round" href=""><i class="feather icon-plus"></i> Add Admin User</a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Gender</th>
+                                        <th>Phone</th>
+                                        <th>Last Login</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in AdminUserList %}
+                                    <tr>
+                                        <td>
+                                            {% if i.photo %}
+                                            <img src="{{i.photo.url}}" class="img-radius" width="30px" height="30px">
+                                            {% endif %}
+                                        </td>
+                                        <td>{{i.fname}}&nbsp;{{i.mname}}&nbsp;{{i.lname}}</td>
+                                        <td>{{i.email}}</td>
+                                        <td>{{i.gender}}</td>
+                                        <td>{{i.mobile}}</td>
+                                        <td>{{i.blood_group}}</td>
+                                        <td>
+                                        {% if i.status == 'activated' %}
+                                                <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:UserStatus' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="UserType" value="AdminUser">
+                                                <input type="hidden" name="fid" value="{{i.email}}">
+                                                <Button type="submit" class="btn btn-info btn-sm px-3 ">{{i.status}}</button>
+                                                </form>
+                                            {% else %}
+                                                <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:UserStatus' %}" method="POST">
+                                                {% csrf_token %}
+                                                 <input type="hidden" name="UserType" value="AdminUser">
+                                                <input type="hidden" name="fid" value="{{i.email}}">
+                                                <Button type="submit" class="btn btn-danger btn-sm">{{i.status}}</button>
+                                                </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- subscribe end -->
+        </div>
+
+        <div class="row">
+            <!-- subscribe start -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Faculty User List</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6 text-end">
+                                <a class="btn btn-success btn-sm mb-3 btn-round" href=""><i class="feather icon-plus"></i> Add Faculty</a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>FID</th>
+                                        <th>Gender</th>
+                                        <th>Phone</th>
+                                        <th>Last Login</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in FacultyUserList %}
+                                    <tr>
+                                        <td>
+                                            {% if i.photo %}
+                                            <img src="{{i.photo.url}}" class="img-radius" width="30px" height="30px">
+                                            {% endif %}
+                                        </td>
+                                        <td>{{i.first_name}}&nbsp;{{i.middel_name}}&nbsp;{{i.last_name}}</td>
+                                        <td>{{i.faculty_id}}</td>
+                                        <td>{{i.gender}}</td>
+                                        <td>{{i.mobile}}</td>
+                                        <td>{{i.blood_group}}</td>
+                                        <td>
+                                        {% if i.status == 'activated' %}
+                                                <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:UserStatus' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="UserType" value="FacultyUser">
+                                                <input type="hidden" name="faculty_id" value="{{i.faculty_id}}">
+                                                <Button type="submit" class="btn btn-info btn-sm px-3 ">{{i.status}}</button>
+                                                </form>
+                                            {% else %}
+                                                <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:UserStatus' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="UserType" value="FacultyUser">
+                                                <input type="hidden" name="faculty_id" value="{{i.faculty_id}}">
+                                                <Button type="submit" class="btn btn-danger btn-sm">{{i.status}}</button>
+                                                </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- subscribe end -->
+        </div>
+
+        <div class="row">
+            <!-- subscribe start -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Student User List</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center m-l-0">
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6 text-end">
+                                <a class="btn btn-success btn-sm mb-3 btn-round" href=""><i class="feather icon-plus"></i> Add Student</a>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="report-table" class="table table-bordered table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>SID</th>
+                                        <th>Gender</th>
+                                        <th>Phone</th>
+                                        <th>Last Login</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in StudentUserList %}
+                                    <tr>
+                                        <td>
+                                            {% if i.photo %}
+                                            <img src="{{i.photo.url}}" class="img-radius" width="30px" height="30px">
+                                            {% endif %}
+                                        </td>
+                                        <td>{{i.fname}}&nbsp;{{i.mname}}&nbsp;{{i.lname}}</td>
+                                        <td>{{i.sid}}</td>
+                                        <td>{{i.gender}}</td>
+                                        <td>{{i.mobile}}</td>
+                                        <td>{{i.blood_group}}</td>
+                                        <td>
+                                            {% if i.status == 'activated' %}
+                                                <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:UserStatus' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="UserType" value="StudentUser">
+                                                <input type="hidden" name="sid" value="{{i.sid}}">
+                                                <Button type="submit" class="btn btn-info btn-sm px-3 ">{{i.status}}</button>
+                                                </form>
+                                            {% else %}
+                                                <form class="login100-form validate-form" enctype="multipart/form-data" action="{% url 'AdminArea:UserStatus' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="UserType" value="StudentUser">
+                                                <input type="hidden" name="sid" value="{{i.sid}}">
+                                                <Button type="submit" class="btn btn-danger btn-sm">{{i.status}}</button>
+                                                </form>
+                                            {% endif %}
+
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- subscribe end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+  
+   <script src="{% static 'AdminArea/js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/bootstrap.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/plugins/feather.min.js' %}"></script>
+    <script src="{% static 'AdminArea/js/pcoded.min.js' %}"></script>
+   
+<!-- Apex Chart -->
+<script src="{% static 'js/plugins/apexcharts.min.js' %}"></script>
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8H86P6FK7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q8H86P6FK7');
+</script>
+<script src="{% static 'js/%c3%a1%c2%b9%c2%adrack.html' %}"></script>
+
+<!-- custom-chart js -->
+<script src="{% static 'js/pages/dashboard-sale.js' %}"></script>
+{% endblock content %}
+</body>
+
+
+</html>
