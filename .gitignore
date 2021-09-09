@@ -2,3 +2,25 @@
 OrphicInstituteMaster/settings.py
 OrphicInstituteMaster/wsgi.py
 OrphicInstituteMaster/urls.py
+ 
+#  def index(request):
+# 	empobj = Emp.objects.all().order_by('email')
+# 	paginator = Paginator(empobj, 3)
+# 	page_number = request.GET.get('page')
+# 	EMPLIST = paginator.get_page(page_number)
+
+#             <span class="step-links">
+# 				        {% if Emplist.has_previous %}
+# 				            <a href="?page=1">&laquo; first</a>
+# 				            <a href="?page={{ Emplist.previous_page_number }}">previous</a>
+# 				        {% endif %}
+
+# 				        <span class="current">
+# 				            Page {{ Emplist.number }} of {{ Emplist.paginator.num_pages }}.
+# 				        </span>
+
+# 				        {% if Emplist.has_next %}
+# 				            <a href="?page={{ Emplist.next_page_number }}">next</a>
+# 				            <a href="?page={{ Emplist.paginator.num_pages }}">last &raquo;</a>
+# 				        {% endif %}
+# 				    </span>
